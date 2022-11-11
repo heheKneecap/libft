@@ -12,14 +12,14 @@
 
 #include "libft.h"
 
-char	*ft_strdup(const char *src)
+char	*ft_strdup(const char *s)
 {
 	char	*str;
 	char	*p;
 	int		len;
 
 	len = 0;
-	while (src[len])
+	while (s[len])
 	{
 		len++;
 	}
@@ -27,9 +27,9 @@ char	*ft_strdup(const char *src)
 	if (!str)
 		return (0);
 	p = str;
-	while (*src)
+	while (*s)
 	{
-		*p++ = *src++;
+		*p++ = *s++;
 	}
 	*p = '\0';
 	return (str);

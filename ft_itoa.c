@@ -32,7 +32,7 @@ static long int	ft_len(int n)
 	while (n != 0)
 	{
 		len++;
-		n = n / 10;
+		n /= 10;
 	}
 	return (len);
 }

@@ -6,7 +6,7 @@
 #    By: mshchuts <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/10/03 13:41:41 by mshchuts          #+#    #+#              #
-#    Updated: 2022/10/17 14:48:33 by mshchuts         ###   ########.fr        #
+#    Updated: 2022/11/11 17:20:17 by mshchuts         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,25 +19,41 @@ SRC = ft_strncmp.c ft_isprint.c ft_memchr.c ft_strlen.c ft_atoi.c ft_memcmp.c \
 	ft_putchar_fd.c ft_putendl_fd.c ft_putnbr_fd.c ft_putstr_fd.c ft_split.c \
 	ft_striteri.c ft_strjoin.c ft_strmapi.c ft_strtrim.c ft_substr.c 
 
+BSRC = ft_lstnew.c ft_lstadd_front.c ft_lstsize.c ft_lstlast.c\
+	ft_lstadd_back.c ft_lstdelone.c ft_lstclear.c ft_lstiter.c\
+	ft_lstmap.c
+
 OBJ = $(SRC:.c=.o)
+
+BOBJ = $(BSRC:.c=.o)
+
+CC = cc
+
+CFLAGS = -c -Wall -Wextra -Werror
+
+ARRC = ar rc
+
+REMOVE = rm -f
+
+RANLIB = ranlib
 
 all: $(NAME)
 
-$(OBJ): 
-	gcc -c -Wall -Wextra -Werror $(SRC)
+$(NAME): $(OBJ) 
+	$(CC) $(CFLAGS) $(SRC)
+	$(ARRC) $(NAME) $(OBJ)
+	$(RANLIB) $(NAME)
 
-$(NAME): $(OBJ)
-	ar -src $@ $(OBJ)
+bonus: $(OBJ) $(BOBJ)
+	$(ARRC) $(NAME) $?
 
 clean: 
-	rm -f $(OBJ)
+	$(REMOVE) $(OBJ) $(BOBJ)
 
-fclean: clean
-	rm -f $(NAME)
+fclean: 
+	$(REMOVE) $(OBJ) $(BOBJ) $(NAME)
 
 re: 
 	fclean all
 
-so:
-	$(CC) -nostartfiles -fPIC $(CFLAGS) $(SRC)
-	gcc -nostartfiles -shared -o libft.so $(OBJ)
+.PHONY: clean fclean all re
