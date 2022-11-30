@@ -6,7 +6,7 @@
 #    By: mshchuts <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/10/03 13:41:41 by mshchuts          #+#    #+#              #
-#    Updated: 2022/11/11 17:20:17 by mshchuts         ###   ########.fr        #
+#    Updated: 2022/11/30 11:53:54 by mshchuts         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -31,29 +31,25 @@ CC = cc
 
 CFLAGS = -c -Wall -Wextra -Werror
 
-ARRC = ar rc
+ARSR = ar -sr
 
 REMOVE = rm -f
-
-RANLIB = ranlib
 
 all: $(NAME)
 
 $(NAME): $(OBJ) 
 	$(CC) $(CFLAGS) $(SRC)
-	$(ARRC) $(NAME) $(OBJ)
-	$(RANLIB) $(NAME)
+	$(ARSR) $(NAME) $(OBJ)
 
-bonus: $(OBJ) $(BOBJ)
-	$(ARRC) $(NAME) $?
+bonus: $(BOBJ)
+	$(ARSR) $(NAME) $?
 
 clean: 
 	$(REMOVE) $(OBJ) $(BOBJ)
 
-fclean: 
+fclean:
 	$(REMOVE) $(OBJ) $(BOBJ) $(NAME)
 
-re: 
-	fclean all
+re: fclean all
 
 .PHONY: clean fclean all re
